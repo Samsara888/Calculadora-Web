@@ -211,16 +211,15 @@ button[onclick*="limpiar"]:hover {
   background-color: #fbc02d;
 }
 
-/* Responsive */
+/* Responsive: solo botones más pequeños */
 @media (max-width: 480px) {
-  .fila {
-    flex-wrap: wrap;
-  }
   .fila button {
-    flex: 0 0 22%;
     font-size: 0.9rem;
+    padding: 10px 0;
   }
+
   #pantalla {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
+    padding: 10px 15px;
   }
 }

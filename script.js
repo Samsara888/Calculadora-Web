@@ -215,20 +215,20 @@ function calcularIntegralIndefinida(funcion) {
 
     throw new Error("No se encontró una regla para esta función");
 }
-
-// === FUNCIONES PARA LA GUÍA ===
-const guiaBtn = document.getElementById('guiaBtn');
-const guiaContainer = document.getElementById('guiaContainer');
-
-if (guiaBtn && guiaContainer) {
-    guiaBtn.addEventListener('click', function () {
-        guiaContainer.classList.toggle('oculto');
+//GUIA
+document.addEventListener('DOMContentLoaded', () => {
+    const guiaBtn = document.getElementById('guiaBtn');
+    const guiaContainer = document.getElementById('guiaContainer');
+  
+    guiaBtn.addEventListener('click', () => {
+      guiaContainer.classList.toggle('oculto');
     });
-
+  
     window.cerrarGuia = function () {
-        guiaContainer.classList.add('oculto');
+      guiaContainer.classList.add('oculto');
     };
-}
+  });
+  
 function calcular() {
     let expresion = pantalla.value;
 

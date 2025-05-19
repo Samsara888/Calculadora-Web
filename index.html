@@ -8,10 +8,8 @@
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.6.0/lib/browser/math.js"></script>
 </head>
 <body>
-  <!-- Botón para mostrar la guía -->
   <button id="guiaBtn">📘 Guía</button>
 
-  <!-- Contenedor guía -->
   <div id="guiaContainer" class="oculto">
     <h2>Instrucciones de Uso</h2>
     <ul>
@@ -21,7 +19,7 @@
       <li>"∫" abre el menú de integrales y "∂" el de derivadas.</li>
       <li>"Ans" reutiliza el resultado anterior. "AC" limpia todo.</li>
     </ul>
-    <button onclick="cerrarGuia()">Cerrar</button>
+    <button id="cerrarGuiaBtn" onclick="cerrarGuia()">Cerrar</button>
   </div>
 
   <!-- Calculadora -->
@@ -136,9 +134,17 @@
     document.addEventListener("DOMContentLoaded", () => {
       const guiaBtn = document.getElementById("guiaBtn");
       const guiaContainer = document.getElementById("guiaContainer");
+      const cerrarGuiaBtn = document.getElementById("cerrarGuiaBtn");
 
-      guiaBtn.addEventListener("click", () => guiaContainer.classList.toggle("oculto"));
-      window.cerrarGuia = () => guiaContainer.classList.add("oculto");
+      // Mostrar/ocultar la guía al presionar el botón Guía
+      guiaBtn.addEventListener("click", () => {
+        guiaContainer.classList.toggle("oculto");
+      });
+
+      // Cerrar la guía al presionar el botón Cerrar dentro de la guía
+      cerrarGuiaBtn.addEventListener("click", () => {
+        guiaContainer.classList.add("oculto");
+      });
 
       let invActiva = false,
           hypActiva = false;
