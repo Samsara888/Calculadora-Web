@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Calculadora Científica</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/mathjs@11.6.0/lib/browser/math.js"></script>
+</head>
+<body>
+  <!-- Botón para mostrar la guía -->
+  <button id="guiaBtn">📘 Guía</button>
+
+  <!-- Contenedor guía -->
+  <div id="guiaContainer" class="oculto">
+    <h2>Instrucciones de Uso</h2>
+    <ul>
+      <li>Presiona los botones para armar tu expresión matemática.</li>
+      <li>Usa "Rad/Deg" para cambiar el modo de ángulos.</li>
+      <li>"Inv" y "Hyp" modifican las funciones trigonométricas.</li>
+      <li>"∫" abre el menú de integrales y "∂" el de derivadas.</li>
+      <li>"Ans" reutiliza el resultado anterior. "AC" limpia todo.</li>
+    </ul>
+    <button onclick="cerrarGuia()">Cerrar</button>
+  </div>
+
+  <!-- Calculadora -->
+  <div class="calculadora">
+    <!-- Pantalla y modo -->
+    <div class="pantalla-container">
+      <div class="modo-display">
+        <span id="modo-indicador">Rad</span>
+      </div>
+      <input type="text" id="pantalla" readonly />
+    </div>
+
+    <div class="botones">
+      <!-- Fila 1 -->
+      <div class="fila">
+        <button onclick="cambiarModo()">Rad/Deg</button>
+        <button onclick="agregar('π')">π</button>
+        <button onclick="agregar('e')">e</button>
+        <button onclick="agregar('(')">(</button>
+        <button onclick="agregar(')')">)</button>
+      </div>
+    
+      <!-- Fila 2 -->
+      <div class="fila">
+        <button id="btn-inv" class="funcion">Inv</button>
+        <button id="btn-sin" onclick="insertarFuncionTrig('sin')">sin</button>
+        <button id="btn-cos" onclick="insertarFuncionTrig('cos')">cos</button>
+        <button id="btn-tan" onclick="insertarFuncionTrig('tan')">tan</button>
+        <button onclick="limpiar()">AC</button>
+      </div>
+    
+      <!-- Fila 3 -->
+      <div class="fila">
+        <button id="btn-hyp" class="funcion">Hyp</button>
+        <button id="btn-ln" onclick="agregar('ln(')">ln</button>
+        <button id="btn-exp" onclick="agregar('exp(')">exp</button>
+        <button onclick="agregar('log10(')">log₁₀</button>
+        <button onclick="agregar('log2(')">log₂</button>
+      </div>
+    
+      <!-- Fila 4 -->
+      <div class="fila">
+        <button onclick="agregar('√(')">√</button>
+        <button onclick="mostrarMenuIntegrales()">∫</button>
+        <button onclick="mostrarMenuDerivada()">∂</button>
+        <button onclick="agregar('^')">x<sup>y</sup></button>
+        <button onclick="agregar('x')">x</button>
+      </div>
+    
+      <!-- Fila 5 -->
+      <div class="fila">
+        <button onclick="agregar('!')">x!</button>
+        <button onclick="generarRandom()">Rnd</button>
+        <button onclick="usarUltimoResultado()">Ans</button>
+        <button onclick="agregar('%')">%</button>
+        <button onclick="agregar('+')">+</button>
+      </div>
+    
+      <!-- Fila 6 -->
+      <div class="fila">
+        <button onclick="agregar('7')">7</button>
+        <button onclick="agregar('8')">8</button>
+        <button onclick="agregar('9')">9</button>
+        <button onclick="agregar('-')">−</button>
+        <button onclick="agregar('*')">×</button>
+      </div>
+    
+      <!-- Fila 7 -->
+      <div class="fila">
+        <button onclick="agregar('4')">4</button>
+        <button onclick="agregar('5')">5</button>
+        <button onclick="agregar('6')">6</button>
+        <button onclick="agregar('/')">÷</button>
+        <button onclick="calcular()">=</button>
+      </div>
+    
+      <!-- Fila 8 -->
+      <div class="fila">
+        <button onclick="agregar('1')">1</button>
+        <button onclick="agregar('2')">2</button>
+        <button onclick="agregar('3')">3</button>
+        <button onclick="agregar('0')">0</button>
+        <button onclick="agregar('.')">.</button>
+      </div>
+    </div>
+  
+
+  <!-- Menú de derivadas -->
+  <div id="menu-derivadas" class="oculto">
+    <h3>Derivada</h3>
+    <label>
+      Función: <input type="text" id="inputFuncionDerivada" placeholder="Ej: x^2 + sin(x)" />
+    </label><br />
+    <label>
+      Variable: <input type="text" id="inputVariableDerivada" value="x" />
+    </label><br />
+    <button onclick="calcularDerivada()">Calcular</button>
+    <button onclick="cerrarMenuDerivadas()">Cancelar</button>
+  </div>
+
+  <!-- Menú de integrales -->
+  <div id="menu-integrales" class="oculto">
+    <h3>Seleccione tipo de integral</h3>
+    <button onclick="mostrarIntegralDefinida()">Definida ∫f(x)dx</button>
+    <button onclick="mostrarIntegralIndefinida()">Indefinida ∫f(x)</button>
+    <button onclick="cerrarMenuIntegrales()">Cancelar</button>
+  </div>
+
+  <!-- Scripts -->
+  <script src="script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const guiaBtn = document.getElementById("guiaBtn");
+      const guiaContainer = document.getElementById("guiaContainer");
+
+      guiaBtn.addEventListener("click", () => guiaContainer.classList.toggle("oculto"));
+      window.cerrarGuia = () => guiaContainer.classList.add("oculto");
+
+      let invActiva = false,
+          hypActiva = false;
+
+      document.getElementById("btn-inv").addEventListener("click", () => {
+        invActiva = !invActiva;
+        actualizarFunciones();
+      });
+
+      document.getElementById("btn-hyp").addEventListener("click", () => {
+        hypActiva = !hypActiva;
+        actualizarFunciones();
+      });
+
+      function actualizarFunciones() {
+        const funciones = {
+          "btn-sin": ["sin", "asin", "sinh", "asinh"],
+          "btn-cos": ["cos", "acos", "cosh", "acosh"],
+          "btn-tan": ["tan", "atan", "tanh", "atanh"],
+          "btn-ln":  ["ln",  "exp",  "ln",   "exp"],
+        };
+
+        for (let id in funciones) {
+          const btn = document.getElementById(id);
+          const [normal, inv, hyp, hypInv] = funciones[id];
+          let texto = invActiva && hypActiva ? hypInv : hypActiva ? hyp : invActiva ? inv : normal;
+          btn.textContent = texto;
+          btn.setAttribute("onclick", `insertarFuncionTrig('${texto}')`);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

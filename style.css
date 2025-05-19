@@ -1,0 +1,226 @@
+/* Reset básico */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 10px;
+  background: #1e1e1e;
+  color: #eee;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Botón guía */
+#guiaBtn {
+  background-color: #3a3a3a;
+  color: #eee;
+  border: none;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: background-color 0.3s;
+}
+#guiaBtn:hover {
+  background-color: #555;
+}
+
+/* Guía */
+#guiaContainer {
+  background: #292929;
+  border-radius: 10px;
+  padding: 15px 20px;
+  max-width: 350px;
+  margin-bottom: 20px;
+}
+.oculto {
+  display: none;
+}
+#guiaContainer h2 {
+  margin-top: 0;
+  color: #f9a825;
+}
+#guiaContainer ul {
+  padding-left: 20px;
+}
+#guiaContainer button {
+  margin-top: 15px;
+  padding: 7px 15px;
+  background-color: #f9a825;
+  border: none;
+  border-radius: 5px;
+  color: #222;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* Calculadora */
+.calculadora {
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px #000;
+  width: 100%;
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Pantalla */
+.pantalla-container {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.modo-display {
+  text-align: right;
+  color: #f9a825;
+  font-weight: bold;
+  font-size: 1rem;
+}
+#pantalla {
+  background: #111;
+  border: none;
+  border-radius: 10px;
+  color: #eee;
+  font-size: 1.8rem;
+  padding: 12px 15px;
+  text-align: right;
+  font-family: 'Courier New', Courier, monospace;
+  user-select: none;
+}
+
+/* Contenedor general de botones */
+.botones {
+  margin-top: 20px;
+}
+
+/* Fila de botones */
+.fila {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+/* Botones generales */
+.fila button {
+  flex: 1;
+  margin: 2px;
+  padding: 15px 0;
+  font-size: 1.1em;
+  border: none;
+  border-radius: 8px;
+  background-color: #3b3b3b;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+/* Hover */
+.fila button:hover {
+  background-color: #f9a825;
+  color: #222;
+}
+
+/* Botones función destacados */
+.fila button.funcion {
+  background: #555;
+}
+.fila button.funcion:hover {
+  background: #fbc02d;
+  color: #222;
+}
+
+/* Botones especiales */
+button:disabled {
+  background-color: #2a2a2a;
+  color: #777;
+  cursor: not-allowed;
+}
+button[onclick*="calcular"],
+button[onclick*="limpiar"] {
+  background-color: #ff9500;
+  color: white;
+}
+button[onclick*="calcular"]:hover,
+button[onclick*="limpiar"]:hover {
+  background-color: #cc7a00;
+}
+
+/* Acordeones de menús */
+.acordeon {
+  width: 100%;
+  max-width: 420px;
+  margin-top: 15px;
+}
+.acordeon h3 {
+  margin: 0;
+  background-color: #3a3a3a;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #f9a825;
+  transition: background-color 0.3s;
+}
+.acordeon h3:hover {
+  background-color: #555;
+}
+.acordeon-contenido {
+  background: #292929;
+  border-radius: 0 0 15px 15px;
+  padding: 15px 20px;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.4s ease-out, padding 0.3s;
+}
+.acordeon-contenido.activo {
+  padding: 15px 20px;
+  max-height: 1000px;
+}
+.acordeon label {
+  display: block;
+  margin-bottom: 8px;
+}
+.acordeon input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+  margin-top: 4px;
+  font-family: monospace;
+}
+.acordeon button {
+  margin: 5px 5px 0 0;
+  padding: 10px 15px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #f9a825;
+  color: #222;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.acordeon button:hover {
+  background-color: #fbc02d;
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+  .fila {
+    flex-wrap: wrap;
+  }
+  .fila button {
+    flex: 0 0 22%;
+    font-size: 0.9rem;
+  }
+  #pantalla {
+    font-size: 1.5rem;
+  }
+}
