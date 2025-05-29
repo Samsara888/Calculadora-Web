@@ -50,8 +50,7 @@
         <button id="btn-sin" onclick="insertarFuncionTrig('sin')">sin</button>
         <button id="btn-cos" onclick="insertarFuncionTrig('cos')">cos</button>
         <button id="btn-tan" onclick="insertarFuncionTrig('tan')">tan</button>
-        <button onclick="limpiar()">AC</button>
-  <button id="btn-borrar" onclick="borrarCaracter()">⌫</button>
+        <button id="btn-borrar">⌫</button>
       </div>
     
       <!-- Fila 3 -->
@@ -78,35 +77,44 @@
         <button onclick="usarUltimoResultado()">Ans</button>
         <button onclick="agregar('%')">%</button>
         <button onclick="graficar()" class="boton-grafico">Gráfico</button>
-        <button onclick="limpiarGrafico()" class="boton-ocultar">Ocultar</button>
+        
       </div>
     
       <!-- Fila 6 -->
-      <div class="fila">
-        <button onclick="agregar('7')">7</button>
-        <button onclick="agregar('8')">8</button>
-        <button onclick="agregar('9')">9</button>
-        <button onclick="agregar('-')">−</button>
-        <button onclick="agregar('*')">×</button>
-      </div>
+<div class="fila">
+  <button onclick="agregar('7')">7</button>
+  <button onclick="agregar('8')">8</button>
+  <button onclick="agregar('9')">9</button>
+  <button onclick="agregar('/')">÷</button>
+  <button onclick="agregar('*')">×</button>
+</div>
+
     
       <!-- Fila 7 -->
-      <div class="fila">
-        <button onclick="agregar('4')">4</button>
-        <button onclick="agregar('5')">5</button>
-        <button onclick="agregar('6')">6</button>
-        <button onclick="agregar('/')">÷</button>
-        <button onclick="calcular()">=</button>
-      </div>
+<div class="fila">
+  <button onclick="agregar('4')">4</button>
+  <button onclick="agregar('5')">5</button>
+  <button onclick="agregar('6')">6</button>
+  <button onclick="agregar('-')">−</button>
+  <button onclick="agregar('+')">+</button>
+</div>
+
     
       <!-- Fila 8 -->
-      <div class="fila">
-        <button onclick="agregar('1')">1</button>
-        <button onclick="agregar('2')">2</button>
-        <button onclick="agregar('3')">3</button>
-        <button onclick="agregar('0')">0</button>
-        <button onclick="agregar('.')">.</button>
-      </div>
+<div class="fila">
+  <button onclick="agregar('1')">1</button>
+  <button onclick="agregar('2')">2</button>
+  <button onclick="agregar('3')">3</button>
+  <button onclick="agregar('.')">.</button>
+  <button onclick="agregar('0')">0</button>
+</div>
+
+<!-- Fila 9 -->
+<div class="fila">
+  <button onclick="calcular()">=</button>
+  <button onclick="limpiarGrafico()" class="boton-ocultar">Ocultar</button>
+</div>
+
 
   
       <div class="fila">

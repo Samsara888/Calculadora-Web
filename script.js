@@ -354,16 +354,30 @@ function graficar() {
       botonDescarga.remove();
     }
   }
- // ===== [ FUNCIÓN DE BORRADO SIMPLE ] ===== //
-function borrarCaracter() {
-    if (pantalla.value.length > 0) {
-      pantalla.value = pantalla.value.slice(0, -1); // Borra solo 1 carácter
-    }
-  }
+  const btnBorrar = document.getElementById("btn-borrar");
+  let presionadoTimer = null;
+  let seBorroTodo = false;
   
-  // Tecla Backspace sigue funcionando
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Backspace" && e.target !== pantalla) {
-      borrarCaracter();
+  btnBorrar.addEventListener("mousedown", () => {
+    seBorroTodo = false;
+    presionadoTimer = setTimeout(() => {
+      limpiar(); // Borra todo si se mantiene presionado
+      seBorroTodo = true;
+    }, 500);
+  });
+  
+  btnBorrar.addEventListener("mouseup", () => {
+    clearTimeout(presionadoTimer);
+    if (!seBorroTodo) {
+      borrarCaracter(); // Borra un carácter si fue clic corto
     }
   });
+  
+  btnBorrar.addEventListener("mouseleave", () => {
+    clearTimeout(presionadoTimer);
+  });
+  function borrarCaracter() {
+    if (pantalla.value.length > 0) {
+      pantalla.value = pantalla.value.slice(0, -1);
+    }
+  }
