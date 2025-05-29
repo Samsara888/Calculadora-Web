@@ -6,6 +6,8 @@
   <title>Calculadora Científica</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/mathjs@11.6.0/lib/browser/math.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
 </head>
 <body>
   <button id="guiaBtn">📘 Guía</button>
@@ -49,6 +51,7 @@
         <button id="btn-cos" onclick="insertarFuncionTrig('cos')">cos</button>
         <button id="btn-tan" onclick="insertarFuncionTrig('tan')">tan</button>
         <button onclick="limpiar()">AC</button>
+  <button id="btn-borrar" onclick="borrarCaracter()">⌫</button>
       </div>
     
       <!-- Fila 3 -->
@@ -59,8 +62,7 @@
         <button onclick="agregar('log10(')">log₁₀</button>
         <button onclick="agregar('log2(')">log₂</button>
       </div>
-    
-      <!-- Fila 4 -->
+    <!-- Fila 4 -->
       <div class="fila">
         <button onclick="agregar('√(')">√</button>
         <button onclick="mostrarMenuIntegrales()">∫</button>
@@ -75,7 +77,8 @@
         <button onclick="generarRandom()">Rnd</button>
         <button onclick="usarUltimoResultado()">Ans</button>
         <button onclick="agregar('%')">%</button>
-        <button onclick="agregar('+')">+</button>
+        <button onclick="graficar()" class="boton-grafico">Gráfico</button>
+        <button onclick="limpiarGrafico()" class="boton-ocultar">Ocultar</button>
       </div>
     
       <!-- Fila 6 -->
@@ -104,8 +107,13 @@
         <button onclick="agregar('0')">0</button>
         <button onclick="agregar('.')">.</button>
       </div>
+
+  
+      <div class="fila">
+      </div>
     </div>
   
+   
 
   <!-- Menú de derivadas -->
   <div id="menu-derivadas" class="oculto">
@@ -177,5 +185,6 @@
       }
     });
   </script>
+  <div id="grafico-container" class="oculto"></div>
 </body>
 </html>

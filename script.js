@@ -273,3 +273,97 @@ function calcularDerivada() {
 function agregar(valor) {
   pantalla.value += valor;
 }
+function graficar() {
+    const funcion = pantalla.value.trim();
+    if (!funcion.includes('x')) {
+      alert("Ingresa una función con 'x'. Ej: x^2 + sin(x)");
+      return;
+    }
+  
+    try {
+      // Generar datos
+      const xValues = [];
+      const yValues = [];
+      for (let x = -10; x <= 10; x += 0.5) {
+        xValues.push(x);
+        yValues.push(math.evaluate(funcion, { x }));
+      }
+  
+      // Configuración profesional del gráfico
+      const layout = {
+        title: {
+          text: `Gráfico de: ${funcion}`,
+          font: { color: '#f9a825', size: 18 }
+        },
+        xaxis: {
+          title: 'Eje X',
+          titlefont: { color: '#eee' },
+          tickfont: { color: '#aaa' },
+          gridcolor: '#444',
+          zerolinecolor: '#666'
+        },
+        yaxis: {
+          title: 'Eje Y',
+          titlefont: { color: '#eee' },
+          tickfont: { color: '#aaa' },
+          gridcolor: '#444',
+          zerolinecolor: '#666'
+        },
+        paper_bgcolor: "#222",  // Fondo del contenedor
+        plot_bgcolor: "#333",   // Fondo del área del gráfico
+        margin: { t: 40, l: 50, r: 30, b: 40 }, // Ajuste de márgenes
+        hovermode: 'closest'
+      };
+  
+      // Trazo (linea del gráfico)
+      const trace = {
+        x: xValues,
+        y: yValues,
+        type: 'scatter',
+        mode: 'lines',
+        line: {
+          color: '#f9a825',  // Color naranja
+          width: 3,
+          shape: 'spline'    // Línea suavizada
+        },
+        name: `f(x) = ${funcion}`
+      };
+  
+      // Dibujar
+      Plotly.newPlot("grafico-container", [trace], layout);
+  
+      // Mostrar
+      document.getElementById("grafico-container").classList.remove("oculto");
+    } catch (error) {
+      alert("Error al graficar. Revisa la función.");
+      console.error(error);
+    }
+  }
+  function limpiarGrafico() {
+    const graficoContainer = document.getElementById("grafico-container");
+    
+    // Oculta el contenedor
+    graficoContainer.classList.add("oculto");
+    
+    // Destruye el gráfico para liberar memoria (opcional pero recomendado)
+    Plotly.purge(graficoContainer);
+    
+    // Elimina el botón de descarga si existe
+    const botonDescarga = graficoContainer.querySelector(".boton-descargar");
+    if (botonDescarga) {
+      botonDescarga.remove();
+    }
+  }
+ // ===== [ FUNCIÓN DE BORRADO SIMPLE ] ===== //
+function borrarCaracter() {
+    if (pantalla.value.length > 0) {
+      pantalla.value = pantalla.value.slice(0, -1); // Borra solo 1 carácter
+    }
+  }
+  
+  // Tecla Backspace sigue funcionando
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Backspace" && e.target !== pantalla) {
+      borrarCaracter();
+    }
+  });

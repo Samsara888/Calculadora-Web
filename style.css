@@ -222,4 +222,60 @@ button[onclick*="limpiar"]:hover {
     font-size: 1.4rem;
     padding: 10px 15px;
   }
+  
+}
+/* Ajusta el tamaño de los botones */
+.fila {
+  display: flex;
+  gap: 5px; /* Espacio entre botones */
+  margin-bottom: 5px;
+}
+
+.fila button {
+  flex: 1;
+  min-width: 0; /* Permite que los botones se ajusten */
+  padding: 12px 0;
+  font-size: 0.9em;
+}
+
+/* Estilos para la nueva fila */
+.fila {
+  display: flex;
+  gap: 5px; /* Espacio entre botones */
+  margin-bottom: 5px;
+}
+
+/* Botón "Gráfico" */
+.boton-grafico {
+  background: #8e44ad !important; /* Morado */
+  color: white !important;
+  flex: 2; /* Ocupa más espacio */
+}
+
+/* Botón "Ocultar" */
+.boton-ocultar {
+  background: #e74c3c !important; /* Rojo */
+  color: white !important;
+  flex: 1;
+}
+#grafico-container {
+  width: 100%;
+  max-width: 420px;
+  height: 300px;
+  margin: 20px auto;
+  border-radius: 10px;
+}
+/* Estilo del botón ⌫ (mismo tamaño que los demás) */
+#btn-borrar {
+  background-color: #e74c3c !important;
+  color: white !important;
+  flex: 1; /* Ocupa el mismo espacio que otros botones */
+  margin: 2px; /* Mismo margen que los demás */
+  padding: 15px 0; /* Mismo padding vertical */
+  font-size: 1.1em; /* Tamaño de fuente similar */
+}
+
+/* Efecto hover (opcional) */
+#btn-borrar:hover {
+  background-color: #c0392b !important;
 }
